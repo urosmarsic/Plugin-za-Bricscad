@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework Condition="'$(CadVersion)' != '26'">net48</TargetFramework>
+    <TargetFramework Condition="'$(CadVersion)' == '26'">net8.0-windows</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+    <PlatformTarget>x64</PlatformTarget>
+    <AssemblyName>Vozisce</AssemblyName>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <LangVersion>latest</LangVersion>
+    <BricsCADDir Condition="'$(BricsCADDir)' == ''">C:/Program Files/Bricsys/BricsCAD V24 en_US</BricsCADDir>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="src/*.cs" />
+    <Reference Include="BrxMgd"><HintPath>$(BricsCADDir)/BrxMgd.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="TD_Mgd"><HintPath>$(BricsCADDir)/TD_Mgd.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="System.Drawing" Condition="'$(CadVersion)' != '26'" />
+    <Reference Include="System.Windows.Forms" Condition="'$(CadVersion)' != '26'" />
+  </ItemGroup>
+</Project>
